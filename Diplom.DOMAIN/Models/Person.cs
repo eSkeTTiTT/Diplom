@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BD_test.Models
+namespace Diplom.DOMAIN
 {
 	[Table("Persons")]
 	public class Person

@@ -1,4 +1,4 @@
-﻿namespace BD_test.Models
+﻿namespace Diplom.DOMAIN
 {
 	public class Video
 	{
