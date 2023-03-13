@@ -1,4 +1,4 @@
-﻿namespace Diplom;
+﻿namespace Diplom.Views;
 
 public partial class MainPage : ContentPage
 {
