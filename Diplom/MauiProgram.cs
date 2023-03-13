@@ -1,5 +1,9 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Diplom.DAL;
+using Diplom.Extensions;
+using Diplom.Views;
+using Microsoft.Extensions.Configuration;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace Diplom;
 
@@ -14,7 +18,10 @@ public static class MauiProgram
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-			});
+			})
+			.RegisterAppServices()
+			.RegisterViewModels()
+			.RegisterViews();
 
 		// Configuration
 		var assembly = Assembly.GetExecutingAssembly();

@@ -1,5 +1,6 @@
 ﻿using Diplom.DOMAIN;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace Diplom.DAL
 {
@@ -19,11 +20,28 @@ namespace Diplom.DAL
 
         public DbSet<Video> Videos { get; set; } = null!;
 
+        #region Private Properties
+
+        private IConfiguration _config;
+
+        #endregion
+
         #region Constructors
 
-        public ApplicationDbContext()
+        public ApplicationDbContext(IConfiguration config)
         {
+            _config = config;
+        }
 
+        #endregion
+
+        #region Methods
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            var connectionString = _config.GetConnectionString("SqlServer");
+
+            optionsBuilder.UseSqlServer(connectionString);
         }
 
         #endregion
