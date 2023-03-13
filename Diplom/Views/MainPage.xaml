@@ -14,6 +14,7 @@
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
+        <Label>asdlalsdlasldalsdlals</Label>
     </Grid>
 
 </ContentPage>

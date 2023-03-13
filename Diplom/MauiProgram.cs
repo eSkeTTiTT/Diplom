@@ -1,4 +1,7 @@
-﻿namespace Diplom;
+﻿using Microsoft.Extensions.Configuration;
+using System.Reflection;
+
+namespace Diplom;
 
 public static class MauiProgram
 {
@@ -12,6 +15,16 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
+
+		// Configuration
+		var assembly = Assembly.GetExecutingAssembly();
+		using var stream = assembly.GetManifestResourceStream("Diplom.appsettings.json");
+
+		var config = new ConfigurationBuilder()
+			.AddJsonStream(stream)
+			.Build();
+
+		builder.Configuration.AddConfiguration(config);
 
 		return builder.Build();
 	}

@@ -14,9 +14,11 @@
             />
         <ShellContent
             Title="Map"
+            ContentTemplate="{DataTemplate views:Map}"
             />
         <ShellContent 
             Title="Camera"
+            ContentTemplate="{DataTemplate views:Camera}"
             />
     </TabBar>
 </Shell>
