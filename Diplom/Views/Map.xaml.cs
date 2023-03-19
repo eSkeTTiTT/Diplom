@@ -16,5 +16,6 @@ public partial class Map : ContentPage
 		MainMapView.SetViewpoint(new Viewpoint(mapCenterPoint, 100000));
 		//looooox
 		//lox 2
+		//loooox 3
 	}
 }
