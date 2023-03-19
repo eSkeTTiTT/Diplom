@@ -59,11 +59,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="ViewModels\" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <PackageReference Include="Esri.ArcGISRuntime.Maui" Version="200.0.0" />
+	  <PackageReference Include="Esri.ArcGISRuntime.Toolkit.Maui" Version="200.0.0" />
 	  <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.4" />
 	  <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
 	</ItemGroup>

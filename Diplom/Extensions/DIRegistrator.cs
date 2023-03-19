@@ -1,4 +1,5 @@
 ﻿using Diplom.DAL;
+using Diplom.ViewModels;
 using Diplom.Views;
 
 namespace Diplom.Extensions
@@ -7,8 +8,12 @@ namespace Diplom.Extensions
     {
         #region VM
 
-        public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder mauiBuider) =>
-            mauiBuider;
+        public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder mauiBuider)
+        {
+            mauiBuider.Services.AddScoped<MapViewModel>();
+
+            return mauiBuider;
+        }
 
         #endregion
 
@@ -27,9 +32,11 @@ namespace Diplom.Extensions
 
         public static MauiAppBuilder RegisterViews(this MauiAppBuilder mauiBuider)
         {
-            mauiBuider.Services.AddTransient<MainPage>();
+            mauiBuider.Services.AddSingleton<MainPage>();
+			mauiBuider.Services.AddSingleton<Camera>();
+			mauiBuider.Services.AddSingleton<Views.Map>();
 
-            return mauiBuider;
+			return mauiBuider;
         }
 
         #endregion
