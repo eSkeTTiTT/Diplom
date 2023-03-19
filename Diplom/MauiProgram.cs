@@ -1,6 +1,8 @@
 ﻿using Diplom.DAL;
 using Diplom.Extensions;
 using Diplom.Views;
+using Esri.ArcGISRuntime.Maui;
+using Esri.ArcGISRuntime.Toolkit.Maui;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -21,7 +23,9 @@ public static class MauiProgram
 			})
 			.RegisterAppServices()
 			.RegisterViewModels()
-			.RegisterViews();
+			.RegisterViews()
+			.UseArcGISRuntime()
+			.UseArcGISToolkit();
 
 		// Configuration
 		var assembly = Assembly.GetExecutingAssembly();
