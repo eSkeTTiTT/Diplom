@@ -4,11 +4,21 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Diplom"
-    Shell.FlyoutBehavior="Disabled">
-
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
-
+    xmlns:views="clr-namespace:Diplom.Views"
+    Shell.FlyoutBehavior="Disabled"
+    >
+    <TabBar>
+        <ShellContent
+            Title="Main"
+            ContentTemplate="{DataTemplate views:MainPage}"
+            />
+        <ShellContent
+            Title="Map"
+            ContentTemplate="{DataTemplate views:Map}"
+            />
+        <ShellContent 
+            Title="Camera"
+            ContentTemplate="{DataTemplate views:Camera}"
+            />
+    </TabBar>
 </Shell>
