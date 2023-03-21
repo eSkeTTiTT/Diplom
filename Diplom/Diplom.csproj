@@ -50,6 +50,9 @@
 
 	<ItemGroup>
 	  <None Remove="appsettings.json" />
+	  <None Remove="Resources\Images\map.svg" />
+	  <None Remove="Resources\Images\svg\camera.svg" />
+	  <None Remove="Resources\Images\svg\main.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -76,6 +79,12 @@
 	  <MauiXaml Update="Views\Map.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiImage Include="Resources\Images\svg\camera.svg" />
+	  <MauiImage Include="Resources\Images\svg\main.svg" />
+	  <MauiImage Include="Resources\Images\svg\map.svg" />
 	</ItemGroup>
 
 </Project>
