@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -8,7 +8,14 @@
 
   <ItemGroup>
     <Folder Include="Interfaces\" />
-    <Folder Include="Realizations\" />
   </ItemGroup>
-
+  <ItemGroup>
+	  <PackageReference Include="Emgu.CV" Version="4.6.0.5131" />
+	  <PackageReference Include="Emgu.CV.runtime.windows" Version="4.6.0.5131" />
+  </ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0-android'">
+		<PackageReference Include="Emgu.CV.runtime.xamarin.mini.android">
+			<Version>4.6.0.5131</Version>
+		</PackageReference>
+	</ItemGroup>
 </Project>
