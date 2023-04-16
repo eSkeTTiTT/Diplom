@@ -50,6 +50,9 @@
 
 	<ItemGroup>
 	  <None Remove="appsettings.json" />
+	  <None Remove="Resources\Images\map.svg" />
+	  <None Remove="Resources\Images\svg\camera.svg" />
+	  <None Remove="Resources\Images\svg\main.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -59,6 +62,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="Emgu.CV" Version="4.6.0.5131" />
+	  <PackageReference Include="Emgu.CV.runtime.windows" Version="4.6.0.5131" />
 	  <PackageReference Include="Esri.ArcGISRuntime.Maui" Version="200.0.0" />
 	  <PackageReference Include="Esri.ArcGISRuntime.Toolkit.Maui" Version="200.0.0" />
 	  <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.4" />
@@ -67,6 +72,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Diplom.DAL\Diplom.DAL.csproj" />
+	  <ProjectReference Include="..\Diplom.Services\Diplom.Services.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -76,6 +82,18 @@
 	  <MauiXaml Update="Views\Map.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiImage Include="Resources\Images\svg\camera.svg" />
+	  <MauiImage Include="Resources\Images\svg\main.svg" />
+	  <MauiImage Include="Resources\Images\svg\map.svg" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0-android'">
+	  <PackageReference Include="Emgu.CV.runtime.xamarin.mini.android">
+	    <Version>4.6.0.5131</Version>
+	  </PackageReference>
 	</ItemGroup>
 
 </Project>

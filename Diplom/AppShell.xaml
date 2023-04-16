@@ -10,14 +10,17 @@
     <TabBar>
         <ShellContent
             Title="Main"
+            Icon="svg/main.svg"
             ContentTemplate="{DataTemplate views:MainPage}"
             />
         <ShellContent
             Title="Map"
+            Icon="svg/map.svg"
             ContentTemplate="{DataTemplate views:Map}"
             />
         <ShellContent 
             Title="Camera"
+            Icon="svg/camera.svg"
             ContentTemplate="{DataTemplate views:Camera}"
             />
     </TabBar>

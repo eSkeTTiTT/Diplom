@@ -14,8 +14,5 @@ public partial class Map : ContentPage
 
 		MapPoint mapCenterPoint = new MapPoint(-118.805, 34.027, SpatialReferences.Wgs84);
 		MainMapView.SetViewpoint(new Viewpoint(mapCenterPoint, 100000));
-		//looooox
-		//lox 2
-		//loooox 3
 	}
 }
