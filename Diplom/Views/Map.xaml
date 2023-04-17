@@ -5,4 +5,14 @@
              x:Class="Diplom.Views.Map"
              x:DataType="vm:MapViewModel"
              Title="Map">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <WebView
+            Grid.Column="0"
+            Source="{Binding RouteUrl, Mode=OneWay}"
+            />
+    </Grid>
 </ContentPage>

@@ -6,36 +6,11 @@ using Emgu.CV;
 using Microsoft.Extensions.FileSystemGlobbing;
 using Emgu.CV.Linemod;
 using Emgu.CV.Structure;
-using Diplom.Infrastructure.Interfaces;
 using System.Windows.Input;
 using System.Net.Http.Json;
 
 namespace Diplom.ViewModels
 {
-	[Serializable]
-	public class MyClass
-	{
-		//
-		// Summary:
-		//     Query descriptor index
-		public int QueryIdx;
-
-		//
-		// Summary:
-		//     Train descriptor index
-		public int TrainIdx;
-
-		//
-		// Summary:
-		//     Train image index
-		public int ImgIdx;
-
-		//
-		// Summary:
-		//     Distance
-		public float Distance;
-	}
-
 	public class CameraViewModel: BaseViewModel
 	{
 		private string _labelTest = "SUCK MY DICK";

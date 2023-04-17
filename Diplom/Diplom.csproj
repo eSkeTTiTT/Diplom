@@ -79,6 +79,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Diplom.DAL\Diplom.DAL.csproj" />
+	  <ProjectReference Include="..\Diplom.Services\Diplom.Services.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

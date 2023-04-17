@@ -1,6 +1,6 @@
 ﻿using Diplom.DAL;
-using Diplom.Infrastructure.Interfaces;
-using Diplom.Infrastructure.Realizations;
+using Diplom.Services.Interfaces;
+using Diplom.Services.Realizations;
 using Diplom.ViewModels;
 using Diplom.Views;
 
@@ -25,7 +25,7 @@ namespace Diplom.Extensions
         public static MauiAppBuilder RegisterAppServices(this MauiAppBuilder mauiBuider)
         {
             mauiBuider.Services.AddScoped<ApplicationDbContext>();
-            mauiBuider.Services.AddScoped<ICVService, CVService>();
+            mauiBuider.Services.AddScoped<IMapService, MapService>();
 
             return mauiBuider;
         }
