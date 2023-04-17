@@ -7,7 +7,6 @@ public partial class MainPage : ContentPage
 {
 	public MainPage(ApplicationDbContext context)
 	{
-		
 		InitializeComponent();
 	}
 }

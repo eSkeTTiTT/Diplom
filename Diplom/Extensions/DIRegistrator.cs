@@ -1,6 +1,6 @@
 ﻿using Diplom.DAL;
-using Diplom.Services.Interfaces;
-using Diplom.Services.Realizations;
+using Diplom.Infrastructure.Interfaces;
+using Diplom.Infrastructure.Realizations;
 using Diplom.ViewModels;
 using Diplom.Views;
 

@@ -1,24 +1,18 @@
-﻿using Diplom.Services.Interfaces;
+﻿using Diplom.Infrastructure.Interfaces;
 using Emgu.CV;
 using Emgu.CV.Features2D;
 using Emgu.CV.Structure;
 using Emgu.CV.Util;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
-namespace Diplom.Services.Realizations
+namespace Diplom.Infrastructure.Realizations
 {
 	public class CVService : ICVService
 	{
 		public async Task KeypointMatching(object scene)
 		{
 
-			//var objectImage = CvInvoke.Imread("C:\\visual studio\\vs_projects\\Diplom\\Diplom\\Resources\\Images\\png\\cat.png");
-			//var sceneImage = CvInvoke.Imread("C:\\visual studio\\vs_projects\\Diplom\\Diplom\\Resources\\Images\\jpg\\scene.jpg");
+			var objectImage = CvInvoke.Imread("C:\\visual studio\\vs_projects\\Diplom\\Diplom\\Resources\\Images\\png\\cat.png");
+			var sceneImage = CvInvoke.Imread("C:\\visual studio\\vs_projects\\Diplom\\Diplom\\Resources\\Images\\jpg\\scene.jpg");
 
 			// Создание детектора SIFT
 			var detector = new Emgu.CV.Features2D.SIFT();
@@ -29,8 +23,8 @@ namespace Diplom.Services.Realizations
 			Mat desc1 = new Mat();
 			Mat desc2 = new Mat();
 
-			//detector.DetectAndCompute(objectImage, null, keypoints1, desc1, false);
-			//detector.DetectAndCompute(sceneImage, null, keypoints2, desc2, false);
+			detector.DetectAndCompute(objectImage, null, keypoints1, desc1, false);
+			detector.DetectAndCompute(sceneImage, null, keypoints2, desc2, false);
 
 			// Создание объекта Matcher и поиск соответствий между дескрипторами
 			var matcher = new BFMatcher(DistanceType.L2Sqr);
