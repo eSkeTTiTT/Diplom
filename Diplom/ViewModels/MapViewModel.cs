@@ -1,4 +1,5 @@
-﻿using Diplom.Services.Interfaces;
+﻿using Diplom.DOMAIN.Models.Map;
+using Diplom.Services.Interfaces;
 using Diplom.ViewModels.Base;
 using System.Windows.Input;
 
@@ -11,12 +12,22 @@ namespace Diplom.ViewModels
 		public MapViewModel(IMapService mapService)
 		{
 			_mapService = mapService;
-			GetRouteCommandExecute();
 		}
 
 		#endregion
 
 		#region Properties
+
+		private MapSettings _mapSettings;
+		public MapSettings MapSettings
+		{
+			get => _mapSettings;
+			set
+			{
+				_mapSettings = value;
+				GetRouteCommandExecute();
+			}
+		}
 
 		private readonly IMapService _mapService;
 
@@ -35,9 +46,9 @@ namespace Diplom.ViewModels
 
 		private async void GetRouteCommandExecute()
 		{
-			var a = await Geolocation.GetLocationAsync();
+			//var a = await Geolocation.GetLocationAsync();
 
-			var result = _mapService.GetRouteUrl(new()).Result;
+			var result = _mapService.GetRouteUrl(MapSettings).Result;
 
 			RouteUrl = result;
 		}

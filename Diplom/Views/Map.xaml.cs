@@ -10,4 +10,9 @@ public partial class Map : ContentPage
 
 		InitializeComponent();
 	}
+
+	private async void Map_Back_To_Choose(object sender, EventArgs e)
+	{
+		await Navigation.PopAsync();
+	}
 }

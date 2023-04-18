@@ -39,6 +39,7 @@ namespace Diplom.Extensions
             mauiBuider.Services.AddSingleton<MainPage>();
 			mauiBuider.Services.AddSingleton<Camera>();
 			mauiBuider.Services.AddSingleton<Views.Map>();
+			mauiBuider.Services.AddSingleton<Views.MapChoose>();
 
 			return mauiBuider;
         }
