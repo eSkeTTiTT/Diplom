@@ -1,8 +1,9 @@
-﻿using Diplom.DAL;
+﻿using Diplom.DOMAIN;
+using Diplom.DOMAIN.DTO;
 using Diplom.DOMAIN.Models.Map;
 using Diplom.DOMAIN.Test;
 using Diplom.ViewModels.Base;
-using Diplom.ViewModels.Contracts;
+using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -62,47 +63,46 @@ namespace Diplom.ViewModels
 
 		#endregion
 
-		private readonly ApplicationDbContext _context;
-
 		public INavigation Navigation { get; set; }
 
 		private readonly MapViewModel _mapViewModel;
 
-		public MapChooseViewModel(ApplicationDbContext context, MapViewModel mapViewModel)
+		private HttpClient _http;
+
+		public MapChooseViewModel(MapViewModel mapViewModel)
 		{
-			_context = context;
 			_mapViewModel = mapViewModel;
+			_http = new();
 
 			InitCommands();
 			InitKindOfActivityList();
 		}
 
-		private void InitKindOfActivityList() =>
+		private void InitKindOfActivityList()
+		{
+			var response = _http.GetAsync("http://10.0.2.2:7144/db/kind-of-activities").Result;
+			var jsonResult = response.Content.ReadAsStringAsync().Result;
+
 			KindOfActivities = new ReadOnlyCollection<string>(
-				_context.KindOfActivities
+				JsonConvert.DeserializeObject<List<KindOfActivity>>(jsonResult)
 					.Select(v => v.Name)
 					.ToList());
+		}
 
-		private void UpdatePersonsList() =>
+		private void UpdatePersonsList()
+		{
+			var response = _http.GetAsync($"http://10.0.2.2:7144/db/persons/from-kind?kind={SelectedKindOfActivity}").Result;
+			var jsonResult = response.Content.ReadAsStringAsync().Result;
+
 			Persons = new ReadOnlyCollection<PersonDto>(
-				_context.Persons
-					.Where(v => v.KindOfActivity.Name == SelectedKindOfActivity)
-					.Select(v => new PersonDto
-					{
-						LocationId = v.LocationId,
-						Name = v.Name,
-						Surname = v.Surname,
-						Patronymic = v.Patronymic,
-						BornDate = v.BornDate,
-						DeathDate = v.DeathDate
-					})
-					.ToList());
+				JsonConvert.DeserializeObject<List<PersonDto>>(jsonResult));
+		}
 
 		#region Commands
 
 		private void InitCommands()
 		{
-			ShowMapCommand = new Command(_ => ShowMapCommandExecute(), _ => ShowMapCommandCanExecute());
+			ShowMapCommand = new Command(ShowMapCommandExecute, ShowMapCommandCanExecute);
 		}
 
 		#region Show Map Command
@@ -111,9 +111,10 @@ namespace Diplom.ViewModels
 
 		private async void ShowMapCommandExecute()
 		{
-			var locationDestination = _context.Locations
-				.FirstOrDefault(v =>
-					v.Id == SelectedPerson.LocationId);
+			var response = _http.GetAsync($"http://10.0.2.2:7144/db/location?id={SelectedPerson.LocationId}").Result;
+			var jsonResult = response.Content.ReadAsStringAsync().Result;
+
+			var locationDestination = JsonConvert.DeserializeObject<DOMAIN.Location>(jsonResult);
 
 			_mapViewModel.MapSettings = new MapSettings()
 			{
