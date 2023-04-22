@@ -1,3 +1,4 @@
+using KeypointMatching;
 using KeypointMatching.Infrastructure.Interfaces;
 using KeypointMatching.Infrastructure.Realizations;
 
@@ -8,6 +9,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddTransient<ICVService, CVService>();
+
+var a = DataDesriptorsHelper.Persons;
 
 var app = builder.Build();
 
