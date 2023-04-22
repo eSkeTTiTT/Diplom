@@ -11,6 +11,8 @@
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
                 <ResourceDictionary>
                     <conv:RouteUrlToWebViewConverter x:Key="RouteUrlConverter" />
+                    <conv:DateTimeToDateConverter x:Key="DateTimeToDateConverter" />
+                    <conv:DateTimeToYearConverter x:Key="DateTimeToYearConverter" />
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
