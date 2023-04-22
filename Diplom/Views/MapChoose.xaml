@@ -24,35 +24,38 @@
                 SelectedItem="{Binding SelectedKindOfActivity, Mode=OneWayToSource}"
                 />
         </StackLayout>
-        <CollectionView
+        <ListView
             x:Name="PersonsCollection"
             IsVisible="{Binding IsPersonsCollectionVisible, Mode=OneWay}"
             Grid.Column="0"
             Grid.Row="1"
             ItemsSource="{Binding Persons, Mode=OneWay}"
+            SelectedItem="{Binding SelectedPerson, Mode=OneWayToSource}"
             >
-            <CollectionView.ItemTemplate>
+            <ListView.ItemTemplate>
                 <DataTemplate x:DataType="contracts:PersonDto">
-                    <StackLayout Orientation="Vertical">
-                        <Label Text="{Binding Name}" />
-                        <Label>
-                            <Label.Text>
-                                <MultiBinding Converter="{StaticResource DateTimeToYearConverter}">
-                                    <Binding Path="BornDate" />
-                                    <Binding Path="DeathDate" />
-                                </MultiBinding>
-                            </Label.Text>
-                        </Label>
-                    </StackLayout>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <Label>
+                                <Label.Text>
+                                    <MultiBinding Converter="{StaticResource DateTimeToYearConverter}">
+                                        <Binding Path="Name" />
+                                        <Binding Path="BornDate" />
+                                        <Binding Path="DeathDate" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                        </ViewCell.View>
+                    </ViewCell>
                 </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+            </ListView.ItemTemplate>
+        </ListView>
         <Button
-            Clicked="ShowMap_Clicked"
             Grid.Row="2"
             Grid.Column="0"
             Grid.ColumnSpan="3"
             Text="Отобразить"
+            Command="{Binding ShowMapCommand}"
             />
     </Grid>
 </ContentPage>

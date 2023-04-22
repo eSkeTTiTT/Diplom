@@ -6,10 +6,12 @@ namespace Diplom.Views.Converters
     {
 		public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
 		{
-			var bornDate = (DateTime?)value[0];
-			var deathdate = (DateTime?)value[1];
+			var name = (string?)value[0];
+			var bornDate = (DateTime?)value[1];
+			var deathdate = (DateTime?)value[2];
 
-			return string.Format("{0} - {1}",
+			return string.Format("{0} ({1} - {2})",
+				name,
 				bornDate?.Year,
 				deathdate?.Year);
 		}

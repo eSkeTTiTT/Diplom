@@ -1,7 +1,10 @@
 ﻿using Diplom.DAL;
+using Diplom.DOMAIN.Models.Map;
+using Diplom.DOMAIN.Test;
 using Diplom.ViewModels.Base;
 using Diplom.ViewModels.Contracts;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace Diplom.ViewModels
 {
@@ -31,10 +34,22 @@ namespace Diplom.ViewModels
 				if (value != _selectedKindOfActivity)
 				{
 					IsPersonsCollectionVisible = true;
-					_selectedKindOfActivity = value;
+					SetProperty(ref _selectedKindOfActivity, value);
 
 					UpdatePersonsList();
+					SelectedPerson = null;
 				}
+			}
+		}
+
+		private PersonDto _selectedPerson;
+		public PersonDto SelectedPerson
+		{
+			get => _selectedPerson;
+			set
+			{
+				SetProperty(ref _selectedPerson, value);
+				((Command)ShowMapCommand).ChangeCanExecute();
 			}
 		}
 
@@ -49,10 +64,16 @@ namespace Diplom.ViewModels
 
 		private readonly ApplicationDbContext _context;
 
-		public MapChooseViewModel(ApplicationDbContext context)
+		public INavigation Navigation { get; set; }
+
+		private readonly MapViewModel _mapViewModel;
+
+		public MapChooseViewModel(ApplicationDbContext context, MapViewModel mapViewModel)
 		{
 			_context = context;
+			_mapViewModel = mapViewModel;
 
+			InitCommands();
 			InitKindOfActivityList();
 		}
 
@@ -75,5 +96,31 @@ namespace Diplom.ViewModels
 						DeathDate = v.DeathDate
 					})
 					.ToList());
+
+		#region Commands
+
+		private void InitCommands()
+		{
+			ShowMapCommand = new Command(_ => ShowMapCommandExecute(), _ => ShowMapCommandCanExecute());
+		}
+
+		public ICommand ShowMapCommand { get; private set; }
+
+		private async void ShowMapCommandExecute()
+		{
+			_mapViewModel.MapSettings = new MapSettings()
+			{
+				LocationSource = TestMap.TestLocation_1,
+				LocationDestination = TestMap.TestLocation_2
+			};
+
+			await Navigation.PushAsync(new Views.Map(_mapViewModel));
+		}
+
+		private bool ShowMapCommandCanExecute() =>
+			SelectedKindOfActivity is not null
+			&& SelectedPerson is not null;
+
+		#endregion
 	}
 }
