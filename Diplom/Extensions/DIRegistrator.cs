@@ -14,6 +14,7 @@ namespace Diplom.Extensions
         {
             mauiBuider.Services.AddScoped<MapViewModel>();
             mauiBuider.Services.AddScoped<CameraViewModel>();
+            mauiBuider.Services.AddScoped<MapChooseViewModel>();
 
             return mauiBuider;
         }
