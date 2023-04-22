@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Diplom.Views.MapChoose"
              xmlns:vm="clr-namespace:Diplom.ViewModels"
+             xmlns:contracts="clr-namespace:Diplom.ViewModels.Contracts"
              x:DataType="vm:MapChooseViewModel"
              Title="MapChoose">
     <Grid>
@@ -16,6 +17,36 @@
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
+        <StackLayout Orientation="Vertical">
+            <Label Text="Выберите вид деятельности:"/>
+            <Picker 
+                ItemsSource="{Binding KindOfActivities}"
+                SelectedItem="{Binding SelectedKindOfActivity, Mode=OneWayToSource}"
+                />
+        </StackLayout>
+        <CollectionView
+            x:Name="PersonsCollection"
+            IsVisible="{Binding IsPersonsCollectionVisible, Mode=OneWay}"
+            Grid.Column="0"
+            Grid.Row="1"
+            ItemsSource="{Binding Persons, Mode=OneWay}"
+            >
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="contracts:PersonDto">
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="{Binding Name}" />
+                        <Label>
+                            <Label.Text>
+                                <MultiBinding Converter="{StaticResource DateTimeToYearConverter}">
+                                    <Binding Path="BornDate" />
+                                    <Binding Path="DeathDate" />
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
         <Button
             Clicked="ShowMap_Clicked"
             Grid.Row="2"

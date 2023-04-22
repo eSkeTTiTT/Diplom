@@ -9,8 +9,10 @@ public partial class MapChoose : ContentPage
 {
 	private MapViewModel _mapViewModel;
 
-	public MapChoose(MapViewModel mapViewModel)
+	public MapChoose(MapViewModel mapViewModel, MapChooseViewModel mapChooseViewModel)
 	{
+		BindingContext = mapChooseViewModel;
+
 		InitializeComponent();
 
 		_mapViewModel = mapViewModel;
