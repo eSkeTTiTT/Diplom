@@ -89,6 +89,7 @@ namespace Diplom.ViewModels
 					.Where(v => v.KindOfActivity.Name == SelectedKindOfActivity)
 					.Select(v => new PersonDto
 					{
+						LocationId = v.LocationId,
 						Name = v.Name,
 						Surname = v.Surname,
 						Patronymic = v.Patronymic,
@@ -104,14 +105,20 @@ namespace Diplom.ViewModels
 			ShowMapCommand = new Command(_ => ShowMapCommandExecute(), _ => ShowMapCommandCanExecute());
 		}
 
+		#region Show Map Command
+
 		public ICommand ShowMapCommand { get; private set; }
 
 		private async void ShowMapCommandExecute()
 		{
+			var locationDestination = _context.Locations
+				.FirstOrDefault(v =>
+					v.Id == SelectedPerson.LocationId);
+
 			_mapViewModel.MapSettings = new MapSettings()
 			{
 				LocationSource = TestMap.TestLocation_1,
-				LocationDestination = TestMap.TestLocation_2
+				LocationDestination = locationDestination
 			};
 
 			await Navigation.PushAsync(new Views.Map(_mapViewModel));
@@ -120,6 +127,8 @@ namespace Diplom.ViewModels
 		private bool ShowMapCommandCanExecute() =>
 			SelectedKindOfActivity is not null
 			&& SelectedPerson is not null;
+
+		#endregion
 
 		#endregion
 	}
