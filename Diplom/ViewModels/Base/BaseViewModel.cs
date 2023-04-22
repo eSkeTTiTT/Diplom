@@ -1,5 +1,4 @@
-﻿using Esri.ArcGISRuntime.Portal;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace Diplom.ViewModels.Base

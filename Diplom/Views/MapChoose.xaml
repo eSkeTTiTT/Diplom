@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Diplom.Views.MapChoose"
+             xmlns:vm="clr-namespace:Diplom.ViewModels"
+             xmlns:contracts="clr-namespace:Diplom.ViewModels.Contracts"
+             x:DataType="vm:MapChooseViewModel"
+             Title="MapChoose">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <StackLayout Orientation="Vertical">
+            <Label Text="Выберите вид деятельности:"/>
+            <Picker 
+                ItemsSource="{Binding KindOfActivities}"
+                SelectedItem="{Binding SelectedKindOfActivity, Mode=OneWayToSource}"
+                />
+        </StackLayout>
+        <ListView
+            x:Name="PersonsCollection"
+            IsVisible="{Binding IsPersonsCollectionVisible, Mode=OneWay}"
+            Grid.Column="0"
+            Grid.Row="1"
+            ItemsSource="{Binding Persons, Mode=OneWay}"
+            SelectedItem="{Binding SelectedPerson, Mode=OneWayToSource}"
+            >
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="contracts:PersonDto">
+                    <ViewCell>
+                        <ViewCell.View>
+                            <Label>
+                                <Label.Text>
+                                    <MultiBinding Converter="{StaticResource DateTimeToYearConverter}">
+                                        <Binding Path="Name" />
+                                        <Binding Path="BornDate" />
+                                        <Binding Path="DeathDate" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Text="Отобразить"
+            Command="{Binding ShowMapCommand}"
+            />
+    </Grid>
+</ContentPage>

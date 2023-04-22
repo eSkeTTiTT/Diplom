@@ -1,24 +1,45 @@
-﻿using Diplom.Services.Interfaces;
+﻿using KeypointMatching.Infrastructure.Interfaces;
 using Emgu.CV;
 using Emgu.CV.Features2D;
 using Emgu.CV.Structure;
 using Emgu.CV.Util;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
-namespace Diplom.Services.Realizations
+namespace KeypointMatching.Infrastructure.Realizations
 {
+	[Serializable]
+	public class MyClass
+	{
+		//
+		// Summary:
+		//     Query descriptor index
+		public int QueryIdx;
+
+		//
+		// Summary:
+		//     Train descriptor index
+		public int TrainIdx;
+
+		//
+		// Summary:
+		//     Train image index
+		public int ImgIdx;
+
+		//
+		// Summary:
+		//     Distance
+		public float Distance;
+	}
+
 	public class CVService : ICVService
 	{
-		public async Task KeypointMatching(object scene)
+		public async Task<string> KeypointMatching(object scene)
 		{
 
-			var objectImage = CvInvoke.Imread("C:\\Users\\Artem Aleksandrovich\\source\\repos\\Diplom\\Diplom\\Resources\\Images\\png\\cat.png");
-			var sceneImage = CvInvoke.Imread("C:\\Users\\Artem Aleksandrovich\\source\\repos\\Diplom\\Diplom\\Resources\\Images\\jpg\\scene.jpg");
+			var objectImage = CvInvoke.Imread("C:\\visual studio\\vs_projects\\Diplom\\Diplom\\Resources\\Images\\png\\cat.png");
+			var sceneImage = CvInvoke.Imread("C:\\visual studio\\vs_projects\\Diplom\\Diplom\\Resources\\Images\\jpg\\scene.jpg");
 
 			// Создание детектора SIFT
 			var detector = new Emgu.CV.Features2D.SIFT();
@@ -56,6 +77,15 @@ namespace Diplom.Services.Realizations
 				}
 			}
 
+			var result = goodMatches.Select(v => new MyClass
+			{
+				Distance = v.Distance,
+				TrainIdx = v.TrainIdx,
+				ImgIdx = v.ImgIdx,
+				QueryIdx = v.QueryIdx
+			});
+
+			return JsonSerializer.Serialize(result.First().Distance);
 		}
 	}
 }

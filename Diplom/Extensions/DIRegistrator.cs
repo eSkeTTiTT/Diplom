@@ -14,6 +14,7 @@ namespace Diplom.Extensions
         {
             mauiBuider.Services.AddScoped<MapViewModel>();
             mauiBuider.Services.AddScoped<CameraViewModel>();
+            mauiBuider.Services.AddScoped<MapChooseViewModel>();
 
             return mauiBuider;
         }
@@ -25,7 +26,7 @@ namespace Diplom.Extensions
         public static MauiAppBuilder RegisterAppServices(this MauiAppBuilder mauiBuider)
         {
             mauiBuider.Services.AddScoped<ApplicationDbContext>();
-            mauiBuider.Services.AddScoped<ICVService, CVService>();
+            mauiBuider.Services.AddScoped<IMapService, MapService>();
 
             return mauiBuider;
         }
@@ -39,6 +40,7 @@ namespace Diplom.Extensions
             mauiBuider.Services.AddSingleton<MainPage>();
 			mauiBuider.Services.AddSingleton<Camera>();
 			mauiBuider.Services.AddSingleton<Views.Map>();
+			mauiBuider.Services.AddSingleton<Views.MapChoose>();
 
 			return mauiBuider;
         }

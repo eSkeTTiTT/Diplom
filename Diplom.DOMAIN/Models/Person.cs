@@ -18,6 +18,9 @@ namespace Diplom.DOMAIN
 		public int KindOfActivityId { get; set; }
 		public KindOfActivity KindOfActivity { get; set; } = null!;
 
+		public DateTime? BornDate { get; set; }
+		public DateTime? DeathDate { get; set; }
+
 		public List<Image> Images { get; set; } = new();
 
 		public List<Audio> Audios { get; set; } = new();

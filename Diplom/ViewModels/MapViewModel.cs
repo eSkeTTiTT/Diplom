@@ -1,5 +1,7 @@
-﻿using Diplom.ViewModels.Base;
-using Esri.ArcGISRuntime.Mapping;
+﻿using Diplom.DOMAIN.Models.Map;
+using Diplom.Services.Interfaces;
+using Diplom.ViewModels.Base;
+using System.Windows.Input;
 
 namespace Diplom.ViewModels
 {
@@ -7,28 +9,49 @@ namespace Diplom.ViewModels
     {
 		#region Constructors
 
-		public MapViewModel()
+		public MapViewModel(IMapService mapService)
 		{
-			SetMap();
+			_mapService = mapService;
 		}
 
 		#endregion
 
 		#region Properties
 
-		private Esri.ArcGISRuntime.Mapping.Map _map;
-		public Esri.ArcGISRuntime.Mapping.Map Map
+		private MapSettings _mapSettings;
+		public MapSettings MapSettings
 		{
-			get => _map;
-			set => SetProperty(ref _map, value);
+			get => _mapSettings;
+			set
+			{
+				_mapSettings = value;
+				GetRouteCommandExecute();
+			}
+		}
+
+		private readonly IMapService _mapService;
+
+		private string _routeUrl;
+		public string RouteUrl
+		{
+			get => _routeUrl;
+			set => SetProperty(ref _routeUrl, value);
 		}
 
 		#endregion
 
-		#region Methods
+		#region Commands
 
-		private void SetMap() =>
-			Map = new Esri.ArcGISRuntime.Mapping.Map(BasemapStyle.ArcGISTopographic);
+		public ICommand GetRouteCommand => new Command(_ => GetRouteCommandExecute(), _ => true);
+
+		private async void GetRouteCommandExecute()
+		{
+			//var a = await Geolocation.GetLocationAsync();
+
+			var result = _mapService.GetRouteUrl(MapSettings).Result;
+
+			RouteUrl = result;
+		}
 
 		#endregion
 	}

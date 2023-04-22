@@ -16,7 +16,7 @@
         <ShellContent
             Title="Map"
             Icon="svg/map.svg"
-            ContentTemplate="{DataTemplate views:Map}"
+            ContentTemplate="{DataTemplate views:MapChoose}"
             />
         <ShellContent 
             Title="Camera"
