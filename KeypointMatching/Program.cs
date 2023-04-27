@@ -1,4 +1,4 @@
-using KeypointMatching;
+using Diplom.DAL;
 using KeypointMatching.Infrastructure.Interfaces;
 using KeypointMatching.Infrastructure.Realizations;
 
@@ -9,8 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddTransient<ICVService, CVService>();
-
-var a = DataDesriptorsHelper.Persons;
+builder.Services.AddDbContext<ApplicationDbContext>();
 
 var app = builder.Build();
 

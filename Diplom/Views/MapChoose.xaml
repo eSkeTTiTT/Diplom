@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Diplom.Views.MapChoose"
              xmlns:vm="clr-namespace:Diplom.ViewModels"
-             xmlns:contracts="clr-namespace:Diplom.ViewModels.Contracts"
+             xmlns:dto="clr-namespace:Diplom.DOMAIN.DTO;assembly=Diplom.DOMAIN"
              x:DataType="vm:MapChooseViewModel"
              Title="MapChoose">
     <Grid>
@@ -19,7 +19,7 @@
         </Grid.ColumnDefinitions>
         <StackLayout Orientation="Vertical">
             <Label Text="Выберите вид деятельности:"/>
-            <Picker 
+            <Picker
                 ItemsSource="{Binding KindOfActivities}"
                 SelectedItem="{Binding SelectedKindOfActivity, Mode=OneWayToSource}"
                 />
@@ -33,7 +33,7 @@
             SelectedItem="{Binding SelectedPerson, Mode=OneWayToSource}"
             >
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="contracts:PersonDto">
+                <DataTemplate x:DataType="dto:PersonDto">
                     <ViewCell>
                         <ViewCell.View>
                             <Label>
