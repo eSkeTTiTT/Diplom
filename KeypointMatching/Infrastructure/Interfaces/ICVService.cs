@@ -1,7 +1,9 @@
-﻿namespace KeypointMatching.Infrastructure.Interfaces
+﻿using Emgu.CV;
+
+namespace KeypointMatching.Infrastructure.Interfaces
 {
 	public interface ICVService
 	{
-		public Task<string> KeypointMatching(object scene);
+		public Task<int> KeypointMatching(Mat photo);
 	}
 }
