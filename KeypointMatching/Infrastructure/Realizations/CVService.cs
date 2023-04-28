@@ -6,86 +6,64 @@ using Emgu.CV.Util;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using KeypointMatching.Contracts;
 
 namespace KeypointMatching.Infrastructure.Realizations
 {
-	[Serializable]
-	public class MyClass
-	{
-		//
-		// Summary:
-		//     Query descriptor index
-		public int QueryIdx;
-
-		//
-		// Summary:
-		//     Train descriptor index
-		public int TrainIdx;
-
-		//
-		// Summary:
-		//     Train image index
-		public int ImgIdx;
-
-		//
-		// Summary:
-		//     Distance
-		public float Distance;
-	}
 
 	public class CVService : ICVService
 	{
-		public async Task<string> KeypointMatching(object scene)
+		public async Task<int> KeypointMatching(Mat photo)
 		{
 
-			var objectImage = CvInvoke.Imread("C:\\visual studio\\vs_projects\\Diplom\\Diplom\\Resources\\Images\\png\\cat.png");
-			var sceneImage = CvInvoke.Imread("C:\\visual studio\\vs_projects\\Diplom\\Diplom\\Resources\\Images\\jpg\\scene.jpg");
+			//var sceneImage = CvInvoke.Imread("C:\\visual studio\\vs_projects\\Diplom\\Diplom\\Resources\\Images\\jpg\\scene.jpg");
 
 			// Создание детектора SIFT
 			var detector = new Emgu.CV.Features2D.SIFT();
+			List<Person>? persons = DataDesriptorsHelper.Persons;
+			List<ResultsOfMatching> resultsOfmatching = new List<ResultsOfMatching>();
 
-			// Обнаружение ключевых точек и вычисление их дескрипторов на обоих изображениях
+			// Обнаружение ключевых точек
 			VectorOfKeyPoint keypoints1 = new VectorOfKeyPoint();
-			VectorOfKeyPoint keypoints2 = new VectorOfKeyPoint();
 			Mat desc1 = new Mat();
-			Mat desc2 = new Mat();
+			detector.DetectAndCompute(photo, null, keypoints1, desc1, false);
 
-			detector.DetectAndCompute(objectImage, null, keypoints1, desc1, false);
-			detector.DetectAndCompute(sceneImage, null, keypoints2, desc2, false);
-
-			// Создание объекта Matcher и поиск соответствий между дескрипторами
 			var matcher = new BFMatcher(DistanceType.L2Sqr);
 			var matches = new VectorOfDMatch();
-			matcher.Match(desc1, desc2, matches);
-			//matcher.KnnMatch(desc2, matches, 2, null);
+			int goodMatches;
 
-			// Отбор наилучших соответствий
-			double minDist = double.MaxValue;
-			for (int i = 0; i < matches.Size; i++)
+			
+			foreach (var person in persons)
 			{
-				double dist = matches[i].Distance;
-				if (dist < minDist) minDist = dist;
-			}
-
-
-			var goodMatches = new List<MDMatch>();
-			for (int i = 0; i < matches.Size; i++)
-			{
-				if (matches[i].Distance <= Math.Max(2 * minDist, 0.02))
+				goodMatches = 0;
+				foreach (var currentDesc in person.Descriptors)
 				{
-					goodMatches.Add(matches[i]);
+					matcher.Match(desc1, currentDesc, matches);
+
+
+					// Отбор наилучших соответствий
+					double minDist = double.MaxValue;
+					for (int i = 0; i < matches.Size; i++)
+					{
+						double dist = matches[i].Distance;
+						if (dist < minDist) minDist = dist;
+					}
+
+
+					for (int i = 0; i < matches.Size; i++)
+					{
+						if (matches[i].Distance <= Math.Max(2 * minDist, 0.02))
+						{
+							++goodMatches;
+						}
+					}
 				}
+				resultsOfmatching.Add(new() { GoodMatches = goodMatches, Id = person.ID });
+	
 			}
 
-			var result = goodMatches.Select(v => new MyClass
-			{
-				Distance = v.Distance,
-				TrainIdx = v.TrainIdx,
-				ImgIdx = v.ImgIdx,
-				QueryIdx = v.QueryIdx
-			});
-
-			return JsonSerializer.Serialize(result.First().Distance);
+			int maxGoodMatches = resultsOfmatching.Max(x => x.GoodMatches);
+			return resultsOfmatching.FirstOrDefault(x => x.GoodMatches == maxGoodMatches).Id;
 		}
 	}
 }
