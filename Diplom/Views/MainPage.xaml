@@ -1,17 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Diplom.Views.MainPage">
+             x:Class="Diplom.Views.MainPage"
+             xmlns:vm="clr-namespace:Diplom.ViewModels"
+             x:DataType="vm:MainPageViewModel">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+
+        <StackLayout Grid.Row="1" Grid.Column="1" Margin="15, 0, 15, 0">
+            <Entry Placeholder="Username" Text="{Binding UserName}" />
+            <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True" />
+            <Button Text="Войти" Command="{Binding SignInCommand}" />
+            <Button Text="Регистрация" Command="{Binding RegisterCommand, Mode=OneWay}" />
+        </StackLayout>
     </Grid>
+    
 </ContentPage>
