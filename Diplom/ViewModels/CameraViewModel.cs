@@ -8,6 +8,7 @@ using Emgu.CV.Linemod;
 using Emgu.CV.Structure;
 using System.Windows.Input;
 using System.Net.Http.Json;
+using Diplom.Helpers;
 
 namespace Diplom.ViewModels
 {
@@ -33,7 +34,7 @@ namespace Diplom.ViewModels
 		private async void KeypointMatching()
 		{
 			var http = new HttpClient();
-			var response = await http.GetAsync("http://10.0.2.2:7144/keypointmatching/get");
+			var response = await http.GetAsync(DbHelper.URL_GetLocation);
 
 			var str = await response.Content.ReadAsStringAsync();
 

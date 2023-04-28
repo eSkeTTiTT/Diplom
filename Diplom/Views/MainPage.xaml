@@ -12,16 +12,22 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-
         <StackLayout Grid.Row="1" Grid.Column="1" Margin="15, 0, 15, 0">
             <Entry Placeholder="Username" Text="{Binding UserName}" />
-            <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True" />
-            <Button Text="Войти" Command="{Binding SignInCommand}" />
-            <Button Text="Регистрация" Command="{Binding RegisterCommand, Mode=OneWay}" />
+            <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True" Margin="0,10,0,0"/>
+            <Button Text="Войти" Command="{Binding SignInCommand}" Margin="0,10,0,0"/>
+            <Button Text="Регистрация" Command="{Binding RegisterCommand, Mode=OneWay}" Margin="0,10,0,0"/>
         </StackLayout>
+        <Label 
+            Grid.Row="2"
+            Grid.Column="0"
+            Text="Пользователь не найден"
+            IsVisible="{Binding IsErrorVisible, Mode=OneWay}"
+            TextColor="Red"
+            />
     </Grid>
     
 </ContentPage>

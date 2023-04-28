@@ -3,7 +3,8 @@ using Diplom.DOMAIN;
 using Diplom.DOMAIN.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Text.Json.Nodes;
+using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace KeypointMatching.Controllers
 {
@@ -16,6 +17,8 @@ namespace KeypointMatching.Controllers
 		public DbController(ApplicationDbContext context)
 		{
 			_context = context;
+
+			var a = _context.Users;
 		}
 
 		[HttpGet]
@@ -48,6 +51,34 @@ namespace KeypointMatching.Controllers
 			return new JsonResult(await _context.Locations
 				.FirstOrDefaultAsync(v =>
 					v.Id == id));
+		}
+
+		[HttpGet]
+		[Route("users")]
+		public async Task<IActionResult> GetUsers()
+		{
+			var users = await _context.Users
+				.Select(u => new UserDTO
+				{
+					UserName = u.UserName,
+					Password = u.Password
+				})
+				.ToListAsync();
+
+			return new JsonResult(users);
+		}
+
+		[HttpPost]
+		[Route("add-user")]
+		public async Task<bool> PostUser(string user)
+		{
+			var res = JsonConvert.DeserializeObject<User>(user);
+
+			_context.Users.Add(res!);
+
+			await _context.SaveChangesAsync();
+
+			return true;
 		}
 	}
 }

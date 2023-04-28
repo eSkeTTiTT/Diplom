@@ -2,6 +2,7 @@
 using Diplom.DOMAIN.DTO;
 using Diplom.DOMAIN.Models.Map;
 using Diplom.DOMAIN.Test;
+using Diplom.Helpers;
 using Diplom.ViewModels.Base;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
@@ -80,7 +81,7 @@ namespace Diplom.ViewModels
 
 		private void InitKindOfActivityList()
 		{
-			var response = _http.GetAsync("http://10.0.2.2:7144/db/kind-of-activities").Result;
+			var response = _http.GetAsync(DbHelper.URL_GetKindOfActivities).Result;
 			var jsonResult = response.Content.ReadAsStringAsync().Result;
 
 			KindOfActivities = new ReadOnlyCollection<string>(
@@ -91,7 +92,7 @@ namespace Diplom.ViewModels
 
 		private void UpdatePersonsList()
 		{
-			var response = _http.GetAsync($"http://10.0.2.2:7144/db/persons/from-kind?kind={SelectedKindOfActivity}").Result;
+			var response = _http.GetAsync(string.Format(DbHelper.URL_GetPersonsFromKind, SelectedKindOfActivity)).Result;
 			var jsonResult = response.Content.ReadAsStringAsync().Result;
 
 			Persons = new ReadOnlyCollection<PersonDto>(
@@ -111,7 +112,7 @@ namespace Diplom.ViewModels
 
 		private async void ShowMapCommandExecute()
 		{
-			var response = _http.GetAsync($"http://10.0.2.2:7144/db/location?id={SelectedPerson.LocationId}").Result;
+			var response = _http.GetAsync(string.Format(DbHelper.URL_GetLocation, SelectedPerson.LocationId)).Result;
 			var jsonResult = response.Content.ReadAsStringAsync().Result;
 
 			var locationDestination = JsonConvert.DeserializeObject<DOMAIN.Location>(jsonResult);
