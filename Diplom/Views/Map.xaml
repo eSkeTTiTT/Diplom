@@ -4,7 +4,7 @@
              xmlns:vm="clr-namespace:Diplom.ViewModels"
              x:Class="Diplom.Views.Map"
              x:DataType="vm:MapViewModel"
-             Title="Map">
+             Title="Карта">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -15,17 +15,9 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <WebView
-            Grid.Row="0"
-            Grid.Column="0"
+            Grid.RowSpan="2"
             Grid.ColumnSpan="2"
             Source="{Binding RouteUrl, Mode=OneWay}"
-            />
-        <Button
-            Clicked="Map_Back_To_Choose"
-            Grid.Row="1"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            Text="Назад"
             />
     </Grid>
 </ContentPage>

@@ -4,7 +4,7 @@
              x:Class="Diplom.Views.Register"
              xmlns:vm="clr-namespace:Diplom.ViewModels"
              x:DataType="vm:RegisterViewModel"
-             Title="Register">
+             Title="Регистрация">
     <Grid Margin="30">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>

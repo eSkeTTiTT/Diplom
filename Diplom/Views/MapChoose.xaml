@@ -5,12 +5,12 @@
              xmlns:vm="clr-namespace:Diplom.ViewModels"
              xmlns:dto="clr-namespace:Diplom.DOMAIN.DTO;assembly=Diplom.DOMAIN"
              x:DataType="vm:MapChooseViewModel"
-             Title="MapChoose">
-    <Grid>
+             Title="Выбор маршрута">
+    <Grid Margin="15, 15, 0, 0">
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -52,8 +52,7 @@
         </ListView>
         <Button
             Grid.Row="2"
-            Grid.Column="0"
-            Grid.ColumnSpan="3"
+            Grid.Column="1"
             Text="Отобразить"
             Command="{Binding ShowMapCommand}"
             />

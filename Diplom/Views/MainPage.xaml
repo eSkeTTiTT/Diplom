@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Diplom.Views.MainPage"
              xmlns:vm="clr-namespace:Diplom.ViewModels"
-             x:DataType="vm:MainPageViewModel">
+             x:DataType="vm:MainPageViewModel"
+             Title="Вход">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -12,7 +13,7 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <StackLayout Grid.Row="1" Grid.Column="1" Margin="15, 0, 15, 0">
@@ -24,9 +25,12 @@
         <Label 
             Grid.Row="2"
             Grid.Column="0"
+            Grid.ColumnSpan="3"
             Text="Пользователь не найден"
             IsVisible="{Binding IsErrorVisible, Mode=OneWay}"
             TextColor="Red"
+            HorizontalOptions="Center"
+            HorizontalTextAlignment="Center"
             />
     </Grid>
     

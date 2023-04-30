@@ -9,17 +9,17 @@
     >
     <TabBar>
         <ShellContent
-            Title="Main"
+            Title="Профиль"
             Icon="svg/main.svg"
             ContentTemplate="{DataTemplate views:MainPage}"
             />
         <ShellContent
-            Title="Map"
+            Title="Карта"
             Icon="svg/map.svg"
             ContentTemplate="{DataTemplate views:MapChoose}"
             />
         <ShellContent 
-            Title="Camera"
+            Title="Вирутальный гид"
             Icon="svg/camera.svg"
             ContentTemplate="{DataTemplate views:Camera}"
             />
