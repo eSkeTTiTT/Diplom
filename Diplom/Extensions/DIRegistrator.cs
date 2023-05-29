@@ -18,6 +18,7 @@ namespace Diplom.Extensions
             mauiBuider.Services.AddScoped<RegisterViewModel>();
             mauiBuider.Services.AddScoped<AnswerViewModel>();
 			mauiBuider.Services.AddScoped<ProfileViewModel>();
+            mauiBuider.Services.AddScoped<ArticleViewModel>();
 
 			return mauiBuider;
         }
@@ -47,6 +48,7 @@ namespace Diplom.Extensions
             mauiBuider.Services.AddSingleton<Views.Register>();
             mauiBuider.Services.AddSingleton<Views.Answer>();
 			mauiBuider.Services.AddSingleton<Views.Profile>();
+            mauiBuider.Services.AddSingleton<Views.Article>();
 
 			return mauiBuider;
         }

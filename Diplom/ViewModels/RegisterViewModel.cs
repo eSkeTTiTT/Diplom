@@ -76,7 +76,7 @@ namespace Diplom.ViewModels
 
 		#region Commands
 
-		public ICommand RegisterCommand => new Command(_ => Register(), _ => true);
+		public ICommand RegisterCommand => new Command(async _ => await Register(), _ => true);
 
 		private async Task Register()
 		{

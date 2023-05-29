@@ -10,4 +10,9 @@ public partial class Camera : ContentPage
 
 		InitializeComponent();
 	}
+
+	private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+	{
+		Navigation.PushAsync(new Article(new ArticleViewModel()));
+    }
 }

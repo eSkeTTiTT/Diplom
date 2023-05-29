@@ -1,0 +1,73 @@
+﻿{
+   "CodeGenerationMode": 2,
+   "ContextClassName": "DiplomDBContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "NewModels",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "Diplom.DOMAIN",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "[dbo].[Audios]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Images]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Kind of activities]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Locations]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Persons]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Texts]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[UserActions]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Users]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Videos]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "desktop-gre3ggp.DiplomDB.dbo",
+   "UncountableWords": null,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDateOnlyTimeOnly": false,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false,
+   "UseT4": false
+}

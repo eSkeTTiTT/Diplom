@@ -10,10 +10,8 @@ namespace Diplom.DOMAIN
 		public string Surname { get; set; } = null!;
 		public string Patronymic { get; set; } = null!;
 
-
 		public int LocationId { get; set; }
 		public Location Location { get; set; } = null!;
-
 
 		public int KindOfActivityId { get; set; }
 		public KindOfActivity KindOfActivity { get; set; } = null!;

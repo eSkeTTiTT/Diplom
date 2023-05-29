@@ -63,6 +63,9 @@ namespace KeypointMatching.Infrastructure.Realizations
 			}
 
 			int maxGoodMatches = resultsOfmatching.Max(x => x.GoodMatches);
+			if (maxGoodMatches < 100)
+				return 0;
+
 			return resultsOfmatching.FirstOrDefault(x => x.GoodMatches == maxGoodMatches).Id;
 		}
 	}

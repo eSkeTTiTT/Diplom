@@ -23,6 +23,8 @@ namespace Diplom.ViewModels
 			set => SetProperty(ref _persons, value);
 		}
 
+		public IReadOnlyCollection<PersonDto> Recommendations { get; set; }
+
 		#endregion
 
 		#region INotifyPropertyChanged Properties
@@ -77,6 +79,13 @@ namespace Diplom.ViewModels
 
 			InitCommands();
 			InitKindOfActivityList();
+			InitRecommendations();
+		}
+
+		private async void InitRecommendations()
+		{
+			var response = await _http.GetAsync(string.Format(DbHelper.URL_GetSuggestions, User.GetId()));
+			Recommendations = JsonConvert.DeserializeObject<IReadOnlyCollection<PersonDto>>(await response.ReadAsJsonAsync());
 		}
 
 		private void InitKindOfActivityList()
@@ -104,6 +113,7 @@ namespace Diplom.ViewModels
 		private void InitCommands()
 		{
 			ShowMapCommand = new Command(ShowMapCommandExecute, ShowMapCommandCanExecute);
+			RecommendCommand = new Command(RecommendCommandExecute, RecommendCommandCanExecute);
 		}
 
 		#region Show Map Command
@@ -129,6 +139,33 @@ namespace Diplom.ViewModels
 		private bool ShowMapCommandCanExecute() =>
 			SelectedKindOfActivity is not null
 			&& SelectedPerson is not null;
+
+		#endregion
+
+		#region Recommend Command
+
+		public ICommand RecommendCommand { get; private set; }
+
+		private async void RecommendCommandExecute()
+		{
+			foreach (var person in Recommendations)
+			{
+				var response = _http.GetAsync(string.Format(DbHelper.URL_GetLocation, person.LocationId)).Result;
+				var jsonResult = response.Content.ReadAsStringAsync().Result;
+
+				var locationDestination = JsonConvert.DeserializeObject<DOMAIN.Location>(jsonResult);
+
+				_mapViewModel.MapSettings = new MapSettings()
+				{
+					LocationSource = TestMap.TestLocation_1,
+					LocationDestination = locationDestination
+				};
+			}
+
+			await Navigation.PushAsync(new Views.Map(_mapViewModel));
+		}
+
+		private bool RecommendCommandCanExecute() => true;
 
 		#endregion
 

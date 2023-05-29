@@ -86,6 +86,9 @@
 	  <MauiXaml Update="Views\Answer.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Article.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Camera.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
