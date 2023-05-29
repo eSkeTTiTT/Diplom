@@ -1,17 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Diplom.Views.MainPage">
+             x:Class="Diplom.Views.MainPage"
+             xmlns:vm="clr-namespace:Diplom.ViewModels"
+             x:DataType="vm:MainPageViewModel"
+             Title="Вход">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <StackLayout Grid.Row="1" Grid.Column="1" Margin="15, 0, 15, 0">
+            <Entry Placeholder="Username" Text="{Binding UserName}" />
+            <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True" Margin="0,10,0,0"/>
+            <Button Text="Войти" Command="{Binding SignInCommand}" Margin="0,10,0,0"/>
+            <Button Text="Регистрация" Command="{Binding RegisterCommand, Mode=OneWay}" Margin="0,10,0,0"/>
+        </StackLayout>
+        <Label 
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Text="Пользователь не найден"
+            IsVisible="{Binding IsErrorVisible, Mode=OneWay}"
+            TextColor="Red"
+            HorizontalOptions="Center"
+            HorizontalTextAlignment="Center"
+            />
     </Grid>
+    
 </ContentPage>

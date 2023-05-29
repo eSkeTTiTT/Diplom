@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:Diplom.ViewModels"
-             x:Class="Diplom.Views.Map"
-             x:DataType="vm:MapViewModel"
-             Title="Карта">
+             x:Class="Diplom.Views.Profile"
+             Title="Профиль">
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition />
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
-        <WebView
-            Grid.RowSpan="2"
-            Grid.ColumnSpan="2"
-            Source="{Binding RouteUrl, Mode=OneWay}"
-            />
+        <VerticalStackLayout>
+            
+        </VerticalStackLayout>
     </Grid>
 </ContentPage>

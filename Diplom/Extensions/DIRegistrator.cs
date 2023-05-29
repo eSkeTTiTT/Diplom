@@ -14,8 +14,13 @@ namespace Diplom.Extensions
             mauiBuider.Services.AddScoped<MapViewModel>();
             mauiBuider.Services.AddScoped<CameraViewModel>();
             mauiBuider.Services.AddScoped<MapChooseViewModel>();
+            mauiBuider.Services.AddScoped<MainPageViewModel>();
+            mauiBuider.Services.AddScoped<RegisterViewModel>();
+            mauiBuider.Services.AddScoped<AnswerViewModel>();
+			mauiBuider.Services.AddScoped<ProfileViewModel>();
+            mauiBuider.Services.AddScoped<ArticleViewModel>();
 
-            return mauiBuider;
+			return mauiBuider;
         }
 
         #endregion
@@ -40,6 +45,10 @@ namespace Diplom.Extensions
 			mauiBuider.Services.AddSingleton<Camera>();
 			mauiBuider.Services.AddSingleton<Views.Map>();
 			mauiBuider.Services.AddSingleton<Views.MapChoose>();
+            mauiBuider.Services.AddSingleton<Views.Register>();
+            mauiBuider.Services.AddSingleton<Views.Answer>();
+			mauiBuider.Services.AddSingleton<Views.Profile>();
+            mauiBuider.Services.AddSingleton<Views.Article>();
 
 			return mauiBuider;
         }

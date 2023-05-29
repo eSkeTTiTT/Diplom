@@ -5,32 +5,35 @@
              xmlns:vm="clr-namespace:Diplom.ViewModels"
              xmlns:dto="clr-namespace:Diplom.DOMAIN.DTO;assembly=Diplom.DOMAIN"
              x:DataType="vm:MapChooseViewModel"
-             Title="MapChoose">
-    <Grid>
+             Title="Выбор маршрута">
+    <Grid Margin="15, 15, 0, 15">
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <StackLayout Orientation="Vertical">
             <Label Text="Выберите вид деятельности:"/>
             <Picker
                 ItemsSource="{Binding KindOfActivities}"
                 SelectedItem="{Binding SelectedKindOfActivity, Mode=OneWayToSource}"
+                
                 />
         </StackLayout>
         <ListView
             x:Name="PersonsCollection"
             IsVisible="{Binding IsPersonsCollectionVisible, Mode=OneWay}"
             Grid.Column="0"
+            Grid.ColumnSpan="2"
             Grid.Row="1"
             ItemsSource="{Binding Persons, Mode=OneWay}"
             SelectedItem="{Binding SelectedPerson, Mode=OneWayToSource}"
+            RowHeight="40"
             >
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="dto:PersonDto">
@@ -40,6 +43,8 @@
                                 <Label.Text>
                                     <MultiBinding Converter="{StaticResource DateTimeToYearConverter}">
                                         <Binding Path="Name" />
+                                        <Binding Path="Surname" />
+                                        <Binding Path="Patronymic" />
                                         <Binding Path="BornDate" />
                                         <Binding Path="DeathDate" />
                                     </MultiBinding>
@@ -50,12 +55,40 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button
-            Grid.Row="2"
-            Grid.Column="0"
-            Grid.ColumnSpan="3"
-            Text="Отобразить"
-            Command="{Binding ShowMapCommand}"
+        <ListView 
+            x:Name="Recommendations"
+            ItemsSource="{Binding Persons, Mode=OneWay}"
+            RowHeight="40">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="dto:PersonDto">
+                    <ViewCell>
+                        <ViewCell.View>
+                            <Label>
+                                <Label.Text>
+                                    <MultiBinding Converter="{StaticResource DateTimeToYearConverter}">
+                                        <Binding Path="Name" />
+                                        <Binding Path="Surname" />
+                                        <Binding Path="Patronymic" />
+                                        <Binding Path="BornDate" />
+                                        <Binding Path="DeathDate" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackLayout Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="3">
+            <Button
+                Margin="0,0,15,0"
+                Text="Отобразить"
+                Command="{Binding ShowMapCommand}"
             />
+            <Button
+                Text="Рекомендации"
+                Command="{Binding RecommendCommand}"
+                />
+        </StackLayout>
     </Grid>
 </ContentPage>

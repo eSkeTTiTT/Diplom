@@ -20,7 +20,7 @@ namespace KeypointMatching.Controllers
 		[HttpGet]
 		public async Task Get()
 		{
-			await HttpContext.Response.WriteAsync(await _cvService.KeypointMatching());
+			//await HttpContext.Response.WriteAsync();
 		}
 
 		[HttpGet]

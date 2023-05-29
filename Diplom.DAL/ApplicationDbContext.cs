@@ -20,6 +20,10 @@ namespace Diplom.DAL
 
         public DbSet<Video> Videos { get; set; } = null!;
 
+        public DbSet<User> Users { get; set; } = null!;
+
+
+
         #region Private Properties
 
         private IConfiguration _config;

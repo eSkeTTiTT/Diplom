@@ -1,4 +1,5 @@
-﻿using Diplom.DOMAIN.Models.Map;
+﻿using CoreFoundation;
+using Diplom.DOMAIN.Models.Map;
 using Diplom.Services.Interfaces;
 using Diplom.ViewModels.Base;
 using System.Windows.Input;

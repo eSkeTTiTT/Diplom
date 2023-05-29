@@ -1,9 +1,15 @@
-﻿namespace Diplom.Views;
+﻿using Diplom.ViewModels;
+
+namespace Diplom.Views;
 
 public partial class MainPage : ContentPage
 {
-	public MainPage()
+	public MainPage(MainPageViewModel VM)
 	{
+		VM.Navigation = Navigation;
+		BindingContext = VM;
+
+
 		InitializeComponent();
 	}
 }
